@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "exercice de formation creation d'un site vitrine/e-commerce ventede jeux video ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Djok64/GameSell.git"
+  },
+  "author": "Joakym Ancelin (Djok)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Djok64/GameSell/issues"
+  },
+  "homepage": "https://github.com/Djok64/GameSell#readme",
+  "dependencies": {
+    "argon2": "^0.31.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "joi": "^17.10.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.1",
+    "nodemon": "^3.0.1"
+  }
+}
