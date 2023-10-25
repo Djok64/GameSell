@@ -1,5 +1,6 @@
-const { findAll, findOne } = require("../model/usersModel.js");
+const { findAll, findOne, addOne } = require("../model/usersModel.js");
 const validateUser = require("../validator/userValidator");
+const { hashPassword } = require("../helper/argonHelper");
 
 const getAll = async (req, res) => {
   try {
@@ -31,8 +32,10 @@ const createOne = async (req, res) => {
     if (errors) {
       return res.status(401).send(errors);
     }
-
-    res.send("req.body a fonctionné informations recupérer");
+    const hashedPassword = await hashPassword(req.body.password);
+    console.log(hashedPassword);
+    const result = await addOne({ ...req.body, password: hashedPassword });
+    res.status(201).send(result);
   } catch (err) {
     res.sendStatus(500);
   }

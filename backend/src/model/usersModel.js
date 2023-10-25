@@ -21,4 +21,17 @@ const findOne = async (id) => {
   }
 };
 
-module.exports = { findAll, findOne };
+const addOne = async (user) => {
+  try {
+    const { email, password, nom } = user;
+    const [result] = await conexionDatabase.query(
+      "INSERT INTO `users`(`e-mail`, password, nom) values(?, ?, ?)",
+      [email, password, nom]
+    );
+    return { id: result.insertId, email, nom };
+  } catch (err) {
+    console.log("erreur:", err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+module.exports = { findAll, findOne, addOne };
