@@ -193,6 +193,7 @@ CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `e-mail` varchar(255) NOT NULL,
   `password` varchar(128) NOT NULL,
+  `nom` varchar(45) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `e-mail_UNIQUE` (`e-mail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;

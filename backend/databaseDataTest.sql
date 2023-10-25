@@ -273,6 +273,7 @@ CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `e-mail` varchar(255) NOT NULL,
   `password` varchar(128) NOT NULL,
+  `nom` varchar(45) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `e-mail_UNIQUE` (`e-mail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
@@ -284,7 +285,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'alice@email.com','alicePassword'),(2,'bob@email.com','bobPassword'),(3,'charlie@email.com','charliePassword');
+INSERT INTO `users` VALUES (1,'alice@email.com','alicePassword','Alice'),(2,'bob@email.com','bobPassword', 'Bob'),(3,'charlie@email.com','charliePassword','Charlie');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

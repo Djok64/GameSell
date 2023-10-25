@@ -17,5 +17,6 @@ router.use("/games", gameRoutes);
 router.use("/users", userRoutes);
 router.use("/clients", clientRoutes);
 router.use("/commandes", commandeRoutes);
+router.use;
 
 module.exports = router;
