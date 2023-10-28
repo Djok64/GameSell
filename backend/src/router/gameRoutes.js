@@ -1,3 +1,5 @@
+//FICHIER ROUTAGES POUR LES ARTICLES(JEUX ETC)
+
 const express = require("express");
 const router = express.Router();
 

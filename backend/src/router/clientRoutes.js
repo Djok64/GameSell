@@ -1,3 +1,5 @@
+//FICHIER ROUTAGE POUR LES CLIENTS
+
 const express = require("express");
 const router = express.Router();
 
