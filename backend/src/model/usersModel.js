@@ -34,4 +34,17 @@ const addOne = async (user) => {
     res.status(500).send("Internal Server Error");
   }
 };
-module.exports = { findAll, findOne, addOne };
+
+const findByEmail = async (email) => {
+  try {
+    const [user] = await conexionDatabase.query(
+      "SELECT * FROM `users` WHERE `e-mail` = ?",
+      [email]
+    );
+    return user;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+module.exports = { findAll, findOne, addOne, findByEmail };
