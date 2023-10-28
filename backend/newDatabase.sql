@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `GameSell`.`users` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `e-mail` VARCHAR(255) NOT NULL,
   `password` VARCHAR(128) NOT NULL,
+  `nom` varchar(45) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `e-mail_UNIQUE` (`e-mail` ASC) VISIBLE)
 ENGINE = InnoDB;
