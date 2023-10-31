@@ -5,14 +5,14 @@ const { decodeJWT } = require("../helper/jwtHelper");
 const authorization = async (req, res, next) => {
   try {
     // Récupération du token d'autorisation depuis les en-têtes de la requête
-    const headerBearerToken = req.headers["authorization"];
-    console.log(headerBearerToken); // Affichage du token pour le débogage
-
+    // const headerBearerToken = req.headers["authorization"];
+    // console.log(headerBearerToken); // Affichage du token pour le débogage
+    const token = req.cookies["auth_token"];
     // Si le token n'est pas présent, une erreur est lancée
-    if (!headerBearerToken) throw new error();
-
+    // if (!headerBearerToken) throw new error();
+    if (!token) throw new error();
     // Destructuration pour obtenir le token seul (après "Bearer ")
-    const [_, token] = headerBearerToken.split(" ");
+    // const [_, token] = headerBearerToken.split(" ");
     console.log("token seul :", token); // Affichage du token seul pour le débogage
 
     // Décodage du token pour obtenir les données
@@ -23,7 +23,8 @@ const authorization = async (req, res, next) => {
     if (!data) {
       return res.status(401).send("You're not loged");
     }
-
+    req.userId = data.user_id;
+    req.userName = data.nom;
     // Si tout est bon, passe au middleware suivant
     return next();
   } catch (err) {
