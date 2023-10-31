@@ -15,7 +15,13 @@ const app = express();
 // Utilisation de CORS (Cross-Origin Resource Sharing) pour gérer les requêtes cross-origin
 // À noter que "*" permet à tous les domaines d'accéder à votre API, ce qui n'est pas recommandé en production
 // TODO il faudra regler ce paramètre hors developpement
-app.use(cors("*"));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
 
 // Utilisation du middleware express.json() pour parser les requêtes JSON entrantes
 app.use(express.json());
