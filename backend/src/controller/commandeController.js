@@ -12,13 +12,15 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
   const commandeId = parseInt(req.params.id, 10);
   try {
-    if (isNaN(commandeId)) {
-      throw new Error();
-    }
     const [commande] = await findOne(commandeId);
-    res.send(commande);
+    if (!commande) {
+      // Si la commande n'est pas trouvé, renvoyez un statut 404 avec un message
+      return res.status(404).send({ error: "Commande not found" });
+    }
+    res.send(game);
   } catch (err) {
-    res.sendStatus(500);
+    // Gestion des erreurs du serveur
+    res.status(500).send({ error: "Server error", details: err.message });
   }
 };
 module.exports = { getAll, getOne };

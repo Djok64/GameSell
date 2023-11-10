@@ -5,7 +5,9 @@ const router = express.Router();
 
 const { getAll, getOne } = require("../controller/commandeController");
 
+const validateId = require("../middleware/idValidator");
+
 router.get("/", getAll);
-router.get("/:id", getOne);
+router.get("/:id", validateId, getOne);
 
 module.exports = router;
