@@ -39,10 +39,11 @@ const getOne = async (req, res) => {
 };
 
 // Fonction asynchrone pour créer un nouvel utilisateur
+//TODO mettre les console.log en commentaire pour la production il revèle des information qui ne doivent pas être accessible mais utile pour le developpement
 const createOne = async (req, res) => {
   try {
     // Affiche le corps de la requête dans la console (pour le débogage)
-    console.log(req.body);
+    console.log("données envoyé du front :", req.body);
     // Utilise le validateur pour vérifier les données de l'utilisateur
     const errors = validateUser(req.body);
     // Si des erreurs sont trouvées, envoie un statut 401 avec les erreurs
@@ -52,7 +53,7 @@ const createOne = async (req, res) => {
     // Hash le mot de passe de l'utilisateur
     const hashedPassword = await hashPassword(req.body.password);
     // Affiche le mot de passe haché dans la console (pour le débogage)
-    console.log(hashedPassword);
+    console.log("password haché:", hashedPassword);
     // Utilise la fonction addOne pour ajouter l'utilisateur à la base de données
     const result = await addOne({ ...req.body, password: hashedPassword });
     // Envoie un statut 201 avec le résultat

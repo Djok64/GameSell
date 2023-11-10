@@ -26,7 +26,7 @@ const findOne = async (id) => {
   }
 };
 
-// Fonction pour ajouter un nouvel utilisateur
+// Fonction pour ajouter un nouvel utilisateur la base de données est regler pour envoyé une erreur si on essaie de creer 2 utilisateur avec le meme user.e-mail
 const addOne = async (user) => {
   try {
     // Destructure l'objet utilisateur pour obtenir email, password et nom
@@ -43,7 +43,7 @@ const addOne = async (user) => {
   }
 };
 
-// Fonction pour trouver un utilisateur par son email
+// Fonction pour trouver un utilisateur par son email pour le login
 const findByEmail = async (email) => {
   try {
     // Exécute la requête SQL avec l'email en paramètre
