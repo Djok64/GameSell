@@ -10,15 +10,20 @@ const getAll = async (req, res) => {
 };
 
 const getOne = async (req, res) => {
+  // Convertir l'ID de chaîne en nombre
   const gameId = parseInt(req.params.id, 10);
+
   try {
-    if (isNaN(gameId)) {
-      throw new Error();
+    const game = await findOne(gameId);
+    if (!game) {
+      // Si le jeu n'est pas trouvé, renvoyez un statut 404 avec un message
+      return res.status(404).send({ error: "Game not found" });
     }
-    const [game] = await findOne(gameId);
     res.send(game);
   } catch (err) {
-    res.sendStatus(500);
+    // Gestion des erreurs du serveur
+    res.status(500).send({ error: "Server error", details: err.message });
   }
 };
+
 module.exports = { getAll, getOne };

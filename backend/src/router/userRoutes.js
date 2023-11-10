@@ -9,11 +9,14 @@ const router = express.Router();
 // Importe les fonctions du contrôleur utilisateur
 const { getAll, getOne, createOne } = require("../controller/userController");
 
+//Importe la fonction du middleware pour valider l'ID
+const validateId = require("../middleware/idValidator");
+
 // Définit la route pour obtenir tous les utilisateurs
 router.get("/", getAll);
 
 // Définit la route pour obtenir un utilisateur spécifique par son ID
-router.get("/:id", getOne);
+router.get("/:id", validateId, getOne);
 
 // Définit la route pour créer un nouvel utilisateur
 router.post("/", createOne);

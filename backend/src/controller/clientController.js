@@ -12,13 +12,15 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
   const clientId = parseInt(req.params.id, 10);
   try {
-    if (isNaN(clientId)) {
-      throw new Error();
-    }
     const [client] = await findOne(clientId);
+    if (!client) {
+      // Si le client n'est pas trouvé, renvoyez un statut 404 avec un message
+      return res.status(404).send({ error: "Client not found" });
+    }
     res.send(client);
   } catch (err) {
-    res.sendStatus(500);
+    // Gestion des erreurs du serveur
+    res.status(500).send({ error: "Server error", details: err.message });
   }
 };
 module.exports = { getAll, getOne };

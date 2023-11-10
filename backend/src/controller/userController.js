@@ -22,21 +22,19 @@ const getAll = async (req, res) => {
 
 // Fonction asynchrone pour récupérer un utilisateur spécifique par son ID
 const getOne = async (req, res) => {
-  // Convertit l'ID en nombre entier
+  // Convertir l'ID de chaîne en nombre
   const userId = parseInt(req.params.id, 10);
+
   try {
-    // Vérifie si l'ID est un nombre
-    if (isNaN(userId)) {
-      // Lance une erreur si l'ID n'est pas un nombre
-      throw new Error();
+    const user = await findOne(userId);
+    if (!user) {
+      // Si l'utilisateur n'est pas trouvé, renvoyez un statut 404 avec un message
+      return res.status(404).send({ error: "User not found" });
     }
-    // Utilise la fonction findOne pour récupérer l'utilisateur par son ID
-    const [user] = await findOne(userId);
-    // Envoie l'utilisateur comme réponse
     res.send(user);
   } catch (err) {
-    // En cas d'erreur, envoie un statut 500
-    res.sendStatus(500);
+    // Gestion des erreurs du serveur
+    res.status(500).send({ error: "Server error", details: err.message });
   }
 };
 
