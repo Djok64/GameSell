@@ -1,12 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import GameApi from "../services/GameApi";
 import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    GameApi.post("/api/auth/login", { email, password })
+      .then((res) => {
+        console.log(res);
+        navigate("/games");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

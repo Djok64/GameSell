@@ -44,18 +44,28 @@ const createOne = async (req, res) => {
   try {
     // Affiche le corps de la requête dans la console (pour le débogage)
     console.log("données envoyé du front :", req.body);
+
     // Utilise le validateur pour vérifier les données de l'utilisateur
-    const errors = validateUser(req.body);
+    // Le paramètre 'true' indique que c'est pour la création d'un utilisateur (mode création)
+    const errors = validateUser(req.body, true);
     // Si des erreurs sont trouvées, envoie un statut 401 avec les erreurs
     if (errors) {
       return res.status(401).send(errors);
     }
+
     // Hash le mot de passe de l'utilisateur
     const hashedPassword = await hashPassword(req.body.password);
     // Affiche le mot de passe haché dans la console (pour le débogage)
     console.log("password haché:", hashedPassword);
+
     // Utilise la fonction addOne pour ajouter l'utilisateur à la base de données
-    const result = await addOne({ ...req.body, password: hashedPassword });
+    // On omet 'confirmPassword' et on remplace 'password' par 'hashedPassword'
+    const result = await addOne({
+      email: req.body.email,
+      password: hashedPassword,
+      nom: req.body.nom,
+    });
+
     // Envoie un statut 201 avec le résultat
     res.status(201).send(result);
   } catch (err) {

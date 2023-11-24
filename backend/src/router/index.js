@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 
 // Utilise les différents routeurs pour chaque entité
 router.use("/games", authorization, gameRoutes);
-router.use("/users", authorization, userRoutes);
+router.use("/users", userRoutes);
 router.use("/clients", authorization, clientRoutes);
 router.use("/commandes", authorization, commandeRoutes);
 router.use("/auth", authRoutes);
